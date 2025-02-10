@@ -1,12 +1,12 @@
 [
     {
-        "Title": "2024-10-20 The very first blog - something about this website",
+        "Title": "The very first blog - something about this website",
         "LastUpdate": "2024-10-20",
         "Pinned": false,
         "Tags": "MISC"
     },
     {
-        "Title": "2024-11-01 Pre-defined filter for IQueryable, compatible with OData",
+        "Title": "Pre-defined filter for IQueryable, compatible with OData",
         "LastUpdate": "2024-11-01",
         "Pinned": false,
         "Tags": ".NET;OData;ASP.NET Core"
