@@ -50,13 +50,13 @@ def main():
                 # Build the metadata entry
                 metadata_list.append({
                     "Title": blog_title_part.strip(),  # remove leading/trailing spaces
-                    "LastUpdate": date_part,
+                    "CreationDate": date_part,
                     "Pinned": pinned,
                     "Tags": blog_tags_str
                 })
 
     # (Optional) Sort metadata_list — e.g., descending by date.
-    # metadata_list.sort(key=lambda x: x["LastUpdate"], reverse=True)
+    # metadata_list.sort(key=lambda x: x["CreationDate"], reverse=True)
 
     # Write out metadata.json
     with open(metadata_path, 'w', encoding='utf-8') as f:
