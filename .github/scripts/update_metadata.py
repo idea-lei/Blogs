@@ -3,7 +3,7 @@ import re
 import json
 
 def main():
-    # Get the path of the repo root (assuming this script is in .github/scripts):
+    # Path references
     script_dir = os.path.dirname(os.path.abspath(__file__))
     repo_root = os.path.abspath(os.path.join(script_dir, '..', '..'))
     
@@ -16,17 +16,19 @@ def main():
     # Will store all distinct tags (in uppercase)
     all_tags = set()
 
-    # Regex to detect blog folder name: "YYYY-MM-DD Something"
-    folder_pattern = re.compile(r'^(\d{4}-\d{2}-\d{2})\s?.*$')
+    # Regex: Capture date in group(1) and the rest of the title in group(2)
+    # Example: "2025-01-01 My Awesome Blog Title"
+    folder_pattern = re.compile(r'^(\d{4}-\d{2}-\d{2})(?:\s+(.*))?$')
 
     # Scan the repo root for potential blog directories
     for entry in os.scandir(repo_root):
         if entry.is_dir() and not entry.name.startswith('.'):
             match = folder_pattern.match(entry.name)
             if match:
-                # Extract date from folder name
                 date_part = match.group(1)
-                
+                # The second group is the actual blog title (excluding the date)
+                blog_title_part = match.group(2) or ""  # default to "" if None
+
                 # Check if pinned file exists
                 pinned_file_path = os.path.join(entry.path, 'pinned')
                 pinned = os.path.isfile(pinned_file_path)
@@ -43,18 +45,17 @@ def main():
                             normalized = t.strip().upper()
                             if normalized:
                                 all_tags.add(normalized)
-                        break  # Assuming only one .tags file per blog folder
+                        break  # assuming only one .tags file per folder
 
                 # Build the metadata entry
                 metadata_list.append({
-                    "Title": entry.name,
+                    "Title": blog_title_part.strip(),  # remove leading/trailing spaces
                     "LastUpdate": date_part,
                     "Pinned": pinned,
                     "Tags": blog_tags_str
                 })
 
-    # Sort metadata_list if you like (optional)
-    # e.g., sort descending by date, or by pinned, etc. Here's a simple sort by date:
+    # (Optional) Sort metadata_list — e.g., descending by date.
     # metadata_list.sort(key=lambda x: x["LastUpdate"], reverse=True)
 
     # Write out metadata.json

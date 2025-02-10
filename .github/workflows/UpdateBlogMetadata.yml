@@ -1,16 +1,10 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Update Blog Metadata
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -30,7 +24,7 @@ jobs:
 
       - name: Generate metadata.json
         run: |
-          python .github/scripts/generate_metadata.py
+          python .github/scripts/update_metadata.py
 
       - name: Commit and push changes
         env:
@@ -42,7 +36,8 @@ jobs:
           # Configure GitHub auth
           git remote set-url origin "https://x-access-token:$GH_TOKEN@github.com/$GITHUB_REPOSITORY.git"
 
-          # Add and commit changes
-          git add metadata.json
+          # Add and commit changes (metadata.json + tags.json)
+          git add metadata.json tags.json
+          # If there's a diff, commit and push
           git diff --quiet && git diff --staged --quiet || \
-            (git commit -m "Auto-update metadata.json" && git push origin HEAD:main)
+            (git commit -m "Auto-update metadata and tags" && git push origin HEAD:main)
