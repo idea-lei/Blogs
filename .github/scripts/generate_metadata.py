@@ -1,52 +1,71 @@
 import os
+import re
 import json
-import subprocess
-from datetime import datetime
 
-def get_blog_metadata():
-    metadata = []
-    repo_root = os.getcwd()
+def main():
+    # Get the path of the repo root (assuming this script is in .github/scripts):
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_root = os.path.abspath(os.path.join(script_dir, '..', '..'))
     
-    # Iterate through all directories in the root
-    for dir_name in os.listdir(repo_root):
-        dir_path = os.path.join(repo_root, dir_name)
-        if os.path.isdir(dir_path):
-            readme_path = os.path.join(dir_path, "README.md")
-            
-            if os.path.exists(readme_path):
-                # Get pinned status
-                pinned = any(f.lower() == "pinned" for f in os.listdir(dir_path))
+    metadata_path = os.path.join(repo_root, 'metadata.json')
+    tags_path = os.path.join(repo_root, 'tags.json')
+
+    # Will store all blogs' metadata
+    metadata_list = []
+    
+    # Will store all distinct tags (in uppercase)
+    all_tags = set()
+
+    # Regex to detect blog folder name: "YYYY-MM-DD Something"
+    folder_pattern = re.compile(r'^(\d{4}-\d{2}-\d{2})\s?.*$')
+
+    # Scan the repo root for potential blog directories
+    for entry in os.scandir(repo_root):
+        if entry.is_dir() and not entry.name.startswith('.'):
+            match = folder_pattern.match(entry.name)
+            if match:
+                # Extract date from folder name
+                date_part = match.group(1)
                 
-                # Get last commit date using git log
-                try:
-                    git_cmd = ["git", "log", "-1", "--format=%cd", "--date=iso-strict", "--", dir_name]
-                    result = subprocess.check_output(git_cmd, stderr=subprocess.STDOUT, text=True)
-                    last_commit = result.strip()
-                except subprocess.CalledProcessError:
-                    last_commit = datetime.now().isoformat()
+                # Check if pinned file exists
+                pinned_file_path = os.path.join(entry.path, 'pinned')
+                pinned = os.path.isfile(pinned_file_path)
                 
-                # Collect tags from filenames (excluding README.md and pinned)
-                tags = set()
-                for filename in os.listdir(dir_path):
-                    file_path = os.path.join(dir_path, filename)
-                    if filename not in ["README.md", "pinned"] and os.path.isfile(file_path):
-                        # Split filename by semicolons and clean tags
-                        for tag in filename.split(';'):
-                            cleaned_tag = tag.strip()
-                            if cleaned_tag:
-                                tags.add(cleaned_tag)
-                
-                # Add to metadata
-                metadata.append({
-                    "Title": dir_name,
-                    "LastUpdate": last_commit,
+                # Look for a file ending in ".tags" to extract tags
+                blog_tags_str = ""
+                for f in os.listdir(entry.path):
+                    if f.endswith('.tags'):
+                        # Remove extension to get tags string, e.g., ".NET;Blazor"
+                        tag_part = os.path.splitext(f)[0]  # ".NET;Blazor"
+                        blog_tags_str = tag_part
+                        # Add tags to global set
+                        for t in tag_part.split(';'):
+                            normalized = t.strip().upper()
+                            if normalized:
+                                all_tags.add(normalized)
+                        break  # Assuming only one .tags file per blog folder
+
+                # Build the metadata entry
+                metadata_list.append({
+                    "Title": entry.name,
+                    "LastUpdate": date_part,
                     "Pinned": pinned,
-                    "Tags": ";".join(sorted(tags))
+                    "Tags": blog_tags_str
                 })
-    
-    return sorted(metadata, key=lambda x: x["LastUpdate"], reverse=True)
 
-if __name__ == "__main__":
-    metadata = get_blog_metadata()
-    with open("metadata.json", "w") as f:
-        json.dump(metadata, f, indent=2, ensure_ascii=False)
+    # Sort metadata_list if you like (optional)
+    # e.g., sort descending by date, or by pinned, etc. Here's a simple sort by date:
+    # metadata_list.sort(key=lambda x: x["LastUpdate"], reverse=True)
+
+    # Write out metadata.json
+    with open(metadata_path, 'w', encoding='utf-8') as f:
+        json.dump(metadata_list, f, indent=4, ensure_ascii=False)
+
+    # Write out tags.json (sorted list of uppercase tags)
+    tags_list = sorted(all_tags)
+    with open(tags_path, 'w', encoding='utf-8') as f:
+        json.dump(tags_list, f, indent=4, ensure_ascii=False)
+
+
+if __name__ == '__main__':
+    main()
