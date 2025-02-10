@@ -17,26 +17,26 @@ The primary focus of this article is on how to leverage AI for conceptual work, 
 
 ## Action Steps
 
-### 1. Clarify Requirements
+1. **Clarify Requirements**
 
-To start, clearly define your current primary goals while leaving room for potential future adjustments. It is recommended to adopt DDD (Domain-Driven Design) or a top-down approach commonly used in engineering. Only when you can accurately articulate your needs can an LLM provide results that closely match your expectations. Although requirements may evolve, it’s crucial to specify the key objectives for each stage.
+   To start, clearly define your current primary goals while leaving room for potential future adjustments. It is recommended to adopt DDD (Domain-Driven Design) or a top-down approach commonly used in engineering. Only when you can accurately articulate your needs can an LLM provide results that closely match your expectations. Although requirements may evolve, it’s crucial to specify the key objectives for each stage.
 
-### 2. Use “Comprehensive Descriptions,” Not “One-Line Chats”
+2. **Use “Comprehensive Descriptions,” Not “One-Line Chats”**
 
-When devising solutions with an LLM, one of the biggest pitfalls is providing only one or two sentences as a prompt. Doing so forces the model to make many assumptions—some of which may clash with your unstated requirements—leading to inaccurate results. Think of it more like writing an “email” rather than sending “chat messages.” A thorough prompt should include requirements, background, constraints, and even your initial ideas all at once. This significantly improves the LLM’s understanding of your context.
-If you’re unsure how to structure your prompt, you can first ask the LLM for help in organizing or refining your requirements, then consolidate that information into a more systematic prompt for it to analyze. A prompt wizard would definitely help.
+   When devising solutions with an LLM, one of the biggest pitfalls is providing only one or two sentences as a prompt. Doing so forces the model to make many assumptions—some of which may clash with your unstated requirements—leading to inaccurate results. Think of it more like writing an “email” rather than sending “chat messages.” A thorough prompt should include requirements, background, constraints, and even your initial ideas all at once. This significantly improves the LLM’s understanding of your context.
+   If you’re unsure how to structure your prompt, you can first ask the LLM for help in organizing or refining your requirements, then consolidate that information into a more systematic prompt for it to analyze. A prompt wizard would definitely help.
 
-### 3. Summarize and Restart Prompting When Needed
+3. **Summarize and Restart Prompting When Needed**
 
-If discussions lead to evolving requirements or if the conversation becomes unwieldy after too many exchanges, consider having the AI summarize the key points so far. Use this summary as the foundation of a new dialogue. This approach prevents an excessive “patch-up” style of conversation and helps maintain conceptual clarity, reducing both misinformation and confusion.
+   If discussions lead to evolving requirements or if the conversation becomes unwieldy after too many exchanges, consider having the AI summarize the key points so far. Use this summary as the foundation of a new dialogue. This approach prevents an excessive “patch-up” style of conversation and helps maintain conceptual clarity, reducing both misinformation and confusion.
 
-### 4. Build a Demo and Validate
+4. **Build a Demo and Validate**
 
-Once the AI provides an outline or solution, start with a small-scale Demo or prototype. Test the core logic to ensure it’s viable before integrating AI-generated outputs into a live project. This helps you catch potential issues early and avoid committing unverified AI suggestions to production code.
+   Once the AI provides an outline or solution, start with a small-scale Demo or prototype. Test the core logic to ensure it’s viable before integrating AI-generated outputs into a live project. This helps you catch potential issues early and avoid committing unverified AI suggestions to production code.
 
-### 5. Learn and Improve
+5. **Learn and Improve**
 
-AI-generated answers often introduce novel concepts, tools, or methodologies. Seize this opportunity to expand your knowledge base and skill set. By continuously engaging with AI and absorbing new information, you broaden your perspective and reinforce your professional abilities.
+   AI-generated answers often introduce novel concepts, tools, or methodologies. Seize this opportunity to expand your knowledge base and skill set. By continuously engaging with AI and absorbing new information, you broaden your perspective and reinforce your professional abilities.
 
 ## Additional Perspectives
 
