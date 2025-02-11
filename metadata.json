@@ -8,7 +8,7 @@
     {
         "Title": "The very first blog - something about this website",
         "CreationDate": "2024-10-20",
-        "Pinned": false,
+        "Pinned": true,
         "Tags": "MISC"
     },
     {
