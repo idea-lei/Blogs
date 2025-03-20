@@ -10,7 +10,7 @@ This website is hosted in docker container, the process is automated using GitHu
 
 ## Why the domain is 'XRify'
 
-Actually the website was originally for the Startup (started in 2022, called XRify - to enable some traditional processes to be supported by XR). I've chosen '.net' as ending since I develop in .net area. But due to some reasons the startup is still conceptional. Previously the website was only for private usage as a toolset, and in 2024 I rebuilt the whole website and extended some functions, added some info for visitors.
+Actually the website was originally thought for a Startup (started in 2022, called XRify - to enable some traditional processes to be supported by XR). I've chosen '.net' as ending since I develop in .net area. But due to some reasons the startup is always under concept.
 
 As I'm writing this blog, I searched the internet and found some smart guys have used the same name 'XRify' but '.de' for their website, they are doing almost the same thing as I do. Well maybe good ideas look similar, wish them good luck with their business. Maybe we can cooperate in the future.
 
