@@ -6,16 +6,16 @@
         "Tags": "MISC"
     },
     {
-        "Title": "Delegate & Event system in C#",
-        "CreationDate": "2025-03-18",
-        "Pinned": false,
-        "Tags": "C#;.NET"
-    },
-    {
         "Title": "Pre-defined filter for IQueryable, compatible with OData",
         "CreationDate": "2024-11-01",
         "Pinned": false,
         "Tags": ".NET;OData;ASP.NET Core"
+    },
+    {
+        "Title": "Delegate and Event system in C#",
+        "CreationDate": "2025-03-18",
+        "Pinned": false,
+        "Tags": "C#;.NET"
     },
     {
         "Title": "Some thoughts on AI assisted development",
