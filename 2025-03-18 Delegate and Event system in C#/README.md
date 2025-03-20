@@ -1,4 +1,4 @@
-# Delegate & Event system in C#
+# Delegate and Event system in C#
 
 C# developers are familiar with `delegate` and `event` as core mechanisms for implementing callbacks. This article examines few aspects of their design and usage.
 
